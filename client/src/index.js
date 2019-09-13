@@ -86,10 +86,25 @@ class Board extends React.Component {
 }
 
 class App extends React.Component {
+	state = { 
+		greeting: '' 
+	}
+
+	componentDidMount() {
+		this.getHello();
+	}
+
+	getHello = () => {
+		fetch(`http://localhost:5000/hello`)
+			.then(res => res.json())
+			.then(res => this.setState({ greeting : res.greeting }))
+			.catch(err => console.error(err));
+	}
+
 	render() {
-		return(
+		return (
 			<div className="app-content">
-				<h1>Hello</h1>
+				<h1>{this.state.greeting}</h1>
 				<Board />
 			</div>
 		)
