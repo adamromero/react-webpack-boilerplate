@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+
 import './style.scss';
 
 class Comment extends React.Component {
@@ -85,6 +87,14 @@ class Board extends React.Component {
 	}
 }
 
+const About = () => {
+	return (
+		<div>
+			<h1>About</h1>
+		</div>
+	);
+}
+
 class App extends React.Component {
 	state = { 
 		greeting: '' 
@@ -111,6 +121,17 @@ class App extends React.Component {
 	}
 }
 
-ReactDOM.render(<App />, document.getElementById('app'));
+const Routing = () => {
+	return (
+		<Router>
+			<Link to="/">Home</Link>
+			<Link to="/about">About</Link>
+			<Route exact path="/" component={App} />
+			<Route path="/about" component={About} />
+		</Router>
+	)
+}
+
+ReactDOM.render(<Routing />, document.getElementById('app'));
 
 module.hot.accept();
